@@ -1,0 +1,542 @@
+body{margin:0;}
+p{margin-top:0.5em;margin-bottom:0.5em;}
+.container{width:80vw;margin:0 auto;}
+.panel{border:1px solid #ddd;border-radius:10px;overflow: hidden;}
+.panel-heading{font-size:24px;border-bottom:border:1px solid #ddd;background-color:#ddd;padding:24px;}
+.panel-body{padding:24px;}
+.panel-body > p{display:flex;align-items: flex-start;}
+.panel-body > p:nth-of-type(even){border-bottom:1px solid #ddd;padding-bottom:15px;}
+.panel-body .human{justify-content: right;}
+.panel-body .ai{justify-content: left;}
+.panel-body .msg-wrap + .msg-wrap{margin-top:24px}
+.panel-body p .msg{margin-top:0;margin-bottom:0;border-radius:8px;padding:16px 24px}
+.panel-body p.human .msg{background-color:#64b9ff;}
+.panel-body p.ai .msg{background-color:#ffda44;}
+#apiKey{background-color:#8F8F8F;box-shadow:none;outline:none;border:0;width:360px;height:30px;max-width:100%;border-radius:2px;color:#fff;margin-top:8px;}
+#apiKey::placeholder{color:#fff;}
+
+#role{background-color:#8F8F8F;box-shadow:none;outline:none;border:0;width:300px;height:30px;max-width:100%;border-radius:2px;color:#fff;margin-top:8px;}
+#role::placeholder{color:#fff;}
+
+button{display:inline-block;margin:24px auto;height:46px;padding:0 60px;font-size:16px;cursor:pointer;background-color:#64b9ff;border-radius:36px;outline:none;border:0;color:#fff;}
+button:hover{background-color:#0289f9;}
+
+
+mark{background:none;color:#898989;}
+
+.fixedtop{position:sticky;top:0;background-color:#fff;border-radius: 10px;overflow: hidden;padding:24px;margin-bottom: 14px;
+box-shadow:
+  0px 1.6px 2.2px rgba(0, 0, 0, 0.02),
+  0px 3.8px 5.3px rgba(0, 0, 0, 0.028),
+  0px 7.1px 10px rgba(0, 0, 0, 0.035),
+  0px 12.7px 17.9px rgba(0, 0, 0, 0.042),
+  0px 23.8px 33.4px rgba(0, 0, 0, 0.05),
+  0px 57px 80px rgba(0, 0, 0, 0.07)
+;}
+
+#sponsor{text-align:center;color:#fff;display:none;}
+#sponsor .text{margin:24px auto;}
+#sponsor img{width:300px;}
+
+#tip{position: fixed;left: 0;right: 0;top: 0;width: 100vw;height: 100vh;background-color: rgba(0, 0, 0, 0.7);color: aliceblue;display: flex;
+align-items: center;
+text-align: center;
+font-size: 60px;
+justify-content: center;
+display: none;
+z-index: 9999;
+}
+
+.usage{margin-top:8px;color:#444;font-size:14px;margin-bottom: 0;text-align: right;}
+.reanswerBtn{display: inline-block;padding: 0 10px;background-color: #8ed420;border-radius: 2px;margin-left: 3px;cursor: pointer;}
+/*开关开始*/
+.checkbox {
+	position: relative;
+	display: inline-block;
+}
+.checkbox:after, .checkbox:before {
+	font-family: FontAwesome;
+	-webkit-font-feature-settings: normal;
+	-moz-font-feature-settings: normal;
+	font-feature-settings: normal;
+	-webkit-font-kerning: auto;
+	-moz-font-kerning: auto;
+	font-kerning: auto;
+	-webkit-font-language-override: normal;
+	-moz-font-language-override: normal;
+	font-language-override: normal;
+	font-stretch: normal;
+	font-style: normal;
+	font-synthesis: weight style;
+	font-variant: normal;
+	font-weight: normal;
+	text-rendering: auto;
+}
+.checkbox label {
+	width: 90px;
+	height: 42px;
+	background: #ccc;
+	position: relative;
+	display: inline-block;
+	border-radius: 46px;
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+}
+.checkbox label:after {
+	content: '';
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	left: 0;
+	top: -5px;
+	z-index: 2;
+	background: #fff;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	-webkit-transition: 0.4s;
+	transition: 0.4s;
+}
+.checkbox input {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	opacity: 0;
+	cursor: pointer;
+}
+.checkbox input:hover + label:after {
+	box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+.checkbox input:checked + label:after {
+	left: 40px;
+}
+.model-1{display:inline-block;color:#fff;margin-left:24px;vertical-align: middle;}
+.model-1 .checkbox input:checked + label {
+	background: #376ecb;
+}
+.model-1 .checkbox input:checked + label:after {
+	background: #4285F4;
+}
+/*开关结束*/
+
+@media (max-width:800px){
+    .panel-heading{font-size:16px;padding:12px 24px;}
+    /*.fixedtop input.question,.fixedtop textarea.question{font-size:16px;}*/
+    .container{width:99%;}
+    button{margin:8px auto;}
+}
+
+/*input,*/
+/*span,*/
+/*label,*/
+/*textarea {*/
+/*  font-family: 'Ubuntu', sans-serif;*/
+/*  display: block;*/
+/*  margin: 10px;*/
+/*  padding: 5px;*/
+/*  border: none;*/
+/*  font-size: 22px;*/
+/*}*/
+pre{white-space:pre-line;}
+textarea:focus,
+input:focus {
+  outline: 0;
+}
+/* Question */
+input.question,
+textarea.question {
+  font-size: 48px;
+  font-weight: 300;
+  border-radius: 2px;
+  margin: 0;
+  border: none;
+  width: 80%;
+  background: rgba(0, 0, 0, 0);
+  transition: padding-top 0.2s ease, margin-top 0.2s ease;
+  overflow-x: hidden; /* Hack to make "rows" attribute apply in Firefox. */
+}
+/* Underline and Placeholder */
+input.question + label,
+textarea.question + label {
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+  border-top: 1px solid red;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  height: 0px;
+}
+input.question:focus + label,
+textarea.question:focus + label {
+  width: 80%;
+}
+input.question:focus,
+input.question:valid {
+  padding-top: 35px;
+}
+textarea.question:valid,
+textarea.question:focus {
+  margin-top: 35px;
+}
+input.question:focus + label > span,
+input.question:valid + label > span {
+  top: -100px;
+  font-size: 22px;
+  color: #333;
+}
+textarea.question:focus + label > span,
+textarea.question:valid + label > span {
+  top: -150px;
+  font-size: 22px;
+  color: #333;
+}
+input.question:valid + label,
+textarea.question:valid + label {
+  border-color: green;
+}
+input.question:invalid,
+textarea.question:invalid {
+  box-shadow: none;
+}
+input.question + label > span,
+textarea.question + label > span {
+  font-weight: 300;
+  margin: 0;
+  position: absolute;
+  color: #8F8F8F;
+  font-size: 48px;
+  top: -66px;
+  left: 0px;
+  z-index: -1;
+  -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+input[type="submit"] {
+  -webkit-transition: opacity 0.2s ease, background 0.2s ease;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  display: block;
+  opacity: 0;
+  margin: 10px 0 0 0;
+  padding: 10px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background: #EEE;
+}
+input[type="submit"]:active {
+  background: #999;
+}
+input.question:valid ~ input[type="submit"], textarea.question:valid ~ input[type="submit"] {
+  -webkit-animation: appear 1s forwards;
+  animation: appear 1s forwards;
+}
+input.question:invalid ~ input[type="submit"], textarea.question:invalid ~ input[type="submit"] {
+  display: none;
+}
+@-webkit-keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes appear {
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/*loading*/
+.sk-chasing-dots {
+  width: 4em;
+  height: 4em;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  -webkit-animation: sk-chasing-dots-rotate 2s infinite linear;
+          animation: sk-chasing-dots-rotate 2s infinite linear;
+}
+.sk-chasing-dots .sk-child {
+  width: 2em;
+  height: 2em;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #098eff;
+  border-radius: 100%;
+  -webkit-animation: sk-chasing-dots-bounce 2s infinite ease-in-out;
+          animation: sk-chasing-dots-bounce 2s infinite ease-in-out;
+}
+.sk-chasing-dots .sk-dot-2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+}
+@-webkit-keyframes sk-chasing-dots-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes sk-chasing-dots-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes sk-chasing-dots-bounce {
+  0%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes sk-chasing-dots-bounce {
+  0%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+/*theme*/
+:root{
+    --dark-border-color: #442566;
+}
+.dark{
+    background-color: #161224;
+}
+.dark .panel{
+    border-color: var(--dark-border-color);
+}
+.dark .panel-heading{
+    background-color: #131a29;
+    color: #4aa6fb;
+}
+.dark .fixedtop{background-color:#1a1332;}
+input.question:valid + label, textarea.question:valid + label{
+    border-color: #4d38a2;
+}
+.dark input.question:focus + label > span,.dark  input.question:valid + label > span{color:#4aa6fb;}
+.dark input.question,.dark  textarea.question{color:#fff;}
+button{background-color:#4d38a2;}
+.dark .panel-body > p:nth-of-type(even){border-color:#4d38a2;}
+
+
+/*机器人*/
+ /* Felix */
+.personal-assistant {
+	position: fixed;
+	margin-top: 100px;
+	bottom: 100px;
+	right: 24px;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	flex-direction: column;
+	/*width: 100%;*/
+}
+.felix {
+	position: absolute;
+	bottom: 50px;
+	width: 110px;
+	height: 95px;
+	border-radius: 45%;
+	border: 3px solid #fff;
+	box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+	animation: breathe-and-jump 3s linear infinite;
+	cursor: pointer;
+	z-index: 1;
+}
+.felix::before {
+	content: '';
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	width: calc(100% + 3px);
+	height: calc(100% + 2px);
+	background-color: #18c;
+	background: linear-gradient(to bottom, #5fc, #1a8);
+	background: -webkit-linear-gradient(to bottom, #5cf, #18c);
+	border-radius: 45%;
+	opacity: 0;
+	transition: 0.3s linear all;
+}
+.felix > .eyes { position: relative; }
+.felix > .eyes > .eye {
+	position: absolute;
+	top: 20px;
+	width: 20px;
+	height: 25px;
+	border-radius: 15px;
+	background-color: #fff;
+	box-shadow: 0 0 7px rgba(255, 255, 255, 0.5);
+	animation: blink 5s linear infinite;
+}
+.felix > .eyes > .eye.left { left: 25%; }
+.felix > .eyes > .eye.right { right: 25%; }
+
+/* Platforms */
+.platform {
+	transform: rotateX(70deg);
+	width: 100px;
+	height: 100px;
+	box-shadow: 0 0 100px #fff,
+		         0 0 15px #fff inset;
+	animation: jump-pulse 3s linear infinite;
+}
+.platform,
+.command-list > li::before {
+	border-radius: 50%;
+	transition: 0.2s linear all;
+}
+.command-list > li::before {
+	content: '';
+	position: absolute;
+	bottom: -35px;
+	left: 50%;
+	width: 65px;
+	height: 65px;
+	transform: translate(-50%) rotateX(70deg);
+	box-shadow: 0 0 50px #fff,
+		         0 0 15px #fff inset;
+}
+
+/* Hover */
+.felix:not(.active):hover {
+	animation: shake-to-alert 0.5s linear;
+	height: 105px;
+	transform: translateY(-4px);
+}
+.felix:not(.active):hover,
+.felix:not(.active):hover > .eyes > .eye {
+	border-color: #fc5;
+	box-shadow: 0 0 5px #fc5;
+}
+.felix:not(.active):hover + .platform {
+	box-shadow: 0 0 100px #fc5,
+		         0 0 15px #fc5 inset;
+	animation: shake-pulse 0.5s linear;
+}
+
+/* Awaiting Command */
+.felix.active { animation: bounce-then-breathe 5s linear infinite; }
+.felix.active::before { opacity: 1; }
+.felix.active,
+.felix.active > .eyes > .eye {
+	border-color: #5fc;
+	box-shadow: 0 0 5px #5fc;
+}
+.felix.active + .platform {
+	box-shadow: 0 0 100px #5fc,
+		         0 0 25px #5fc inset;
+	animation: bounce-pulse 5s linear;
+}
+
+/* Deactivation */
+.felix.inactive {
+	animation: deactivate 0.75s linear,
+				  breathe-and-jump 3s linear infinite;
+}
+.felix.inactive + .platform {
+	animation: deactivate-platform 0.75s linear;
+}
+
+/* Animations */
+@keyframes fade-in {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes breathe {
+	0%, 100% {
+		height: 95px;
+		transform: translateY(0);
+	}
+	50% {
+		height: 100px;
+		transform: translateY(-5px);
+	}
+}
+@keyframes bounce-then-breathe {
+	0%, 5%, 10%, 15% { transform: translateY(0); }
+	2.5%, 7.5%, 12.5% { transform: translateY(-15px); }
+	20%, 40%, 60%, 80%, 100% {
+		height: 95px;
+		transform: translateY(0);
+	}
+	30%, 50%, 70%, 90% {
+		height: 100px;
+		transform: translateY(-5px);
+	}
+}
+@keyframes shake-pulse {
+	0%, 20%, 40%, 60%, 80%, 100% { box-shadow: 0 0 100px #fc5, 0 0 15px #fc5 inset; }
+	10%, 25%, 35%, 50%, 65% { box-shadow: 0 0 115px #fc5, 0 0 15px #fc5 inset; }
+	15%, 30%, 45%, 55%, 70% { box-shadow: 0 0 95px #fc5, 0 0 15px #fc5 inset; }
+}
+@keyframes bounce-pulse {
+	0%, 5%, 10%, 15% { box-shadow: 0 0 30px #5fc, 0 0 45px #5fc inset; }
+	2.5%, 7.5%, 12.5% { box-shadow: 0 0 100px #5fc, 0 0 15px #5fc inset; }
+	20%, 40%, 60%, 80%, 100% { box-shadow: 0 0 30px #5fc, 0 0 45px #5fc inset; }
+	30%, 50%, 70%, 90% { box-shadow: 0 0 70px #5fc, 0 0 25px #5fc inset; }
+}
+@keyframes jump-pulse {
+	0%, 40%, 80%, 100% {
+		box-shadow: 0 0 30px #fff,
+		         	0 0 45px #fff inset;
+	}
+	20%, 60%, 70%, 90% {
+		box-shadow: 0 0 70px #fff,
+		         	0 0 25px #fff inset;
+	}
+	85% {
+		box-shadow: 0 0 100px #fff,
+		         	0 0 15px #fff inset;
+	}
+}
+@keyframes breathe-and-jump {
+	0%, 40%, 80%, 100% { height: 95px; transform: translateY(0); }
+	20%, 60%, 70%, 90% { height: 100px; transform: translateY(-5px); }
+	85% { height: 85px; transform: translateY(-20px); }
+}
+@keyframes shake-to-alert {
+	0%, 20%, 40%, 60%, 80%, 100% { transform: rotate(0) translateY(-5px); }
+	10%, 25%, 35%, 50%, 65% { transform: rotate(5deg) translateY(-5px); }
+	15%, 30%, 45%, 55%, 70% { transform: roate(-5deg) translateY(-5px); }
+}
+@keyframes blink {
+	0%, 100% { transform: scale(1, 0.05); }
+	5%, 95% { transform: scale(1, 1); }
+}
+@keyframes deactivate {
+	0% { border-color: #5fc; }
+	20%, 60% { border-color: #f55; }
+	40%, 80%, 100% { border-color: #fff; }
+}
+@keyframes deactivate-platform {
+	0% { box-shadow: 0 0 100px #5fc, 0 0 15px #5fc inset; }
+	40%, 80%, 100% { box-shadow: 0 0 15px #fff, 0 0 15px #fff inset; }
+	20%, 60% { box-shadow: 0 0 100px #f55, 0 0 15px #f55 inset; }
+}
+
+
+
+
+
+
+
+
+
+
+
